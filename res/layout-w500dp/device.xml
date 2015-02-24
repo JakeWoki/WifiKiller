@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.paranoid.wifikill.AdapterRowLayout android:id="@id/RelativeLayout1" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/killed_layout" android:background="@drawable/background_killed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignTop="@id/info" android:layout_alignBottom="@id/info">
+        <View android:id="@id/state" android:background="#30ff0000" android:layout_width="12.0dip" android:layout_height="fill_parent" />
+    </LinearLayout>
+    <View android:id="@id/killed_shadow" android:background="@drawable/shadow_left" android:layout_width="8.0dip" android:layout_height="wrap_content" android:layout_toRightOf="@id/killed_layout" android:layout_alignTop="@id/info" android:layout_alignBottom="@id/info" />
+    <LinearLayout android:orientation="vertical" android:id="@id/info" android:paddingLeft="4.0dip" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toRightOf="@id/killed_layout">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textAppearance="?android:framesCount" android:id="@id/ip" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/example_ip" />
+            <TextView android:textColor="?android:layout_removeBorders" android:id="@id/name" android:paddingLeft="8.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/example_device_name" />
+        </LinearLayout>
+        <TextView android:textStyle="italic" android:textColor="?android:layout_removeBorders" android:id="@id/nbname" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NetBIOS Name" />
+        <LinearLayout android:id="@id/net_usage" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:textColorHint" android:id="@id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/device_label_up" />
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textStyle="bold" android:id="@id/up" android:paddingLeft="2.0dip" android:paddingRight="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/example_1mb" />
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:textColorHint" android:id="@id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/device_label_down" />
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textStyle="bold" android:id="@id/down" android:paddingLeft="2.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/example_1mb" />
+        </LinearLayout>
+        <TextView android:textAppearance="?android:textAppearanceSmall" android:id="@id/vendor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/example_device_vendor" />
+        <TextView android:textColor="?android:textColorHint" android:id="@id/hwaddr" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="00:11:22:33:44:55" />
+    </LinearLayout>
+</me.paranoid.wifikill.AdapterRowLayout>

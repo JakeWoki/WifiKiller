@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/RelativeLayout1" android:background="@drawable/background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/view4" android:background="#b0333333" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_alignParentTop="true" />
+    <View android:id="@id/view3" android:background="@drawable/shadow_top" android:layout_width="fill_parent" android:layout_height="10.0dip" android:layout_alignParentTop="true" />
+    <fragment android:name="me.paranoid.wifikill.fragment.DevicesFragment" android:id="@id/device_list" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/status_bar" class="me.paranoid.wifikill.fragment.DevicesFragment" />
+    <View android:id="@id/view1" android:background="@drawable/shadow_bottom" android:layout_width="fill_parent" android:layout_height="8.0dip" android:layout_above="@id/status_bar" android:layout_centerHorizontal="true" />
+    <View android:id="@id/view2" android:background="#20ffffff" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_above="@id/status_bar" />
+    <ProgressBar android:id="@id/search_progress" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" style="?android:attr/progressBarStyleHorizontal" />
+    <fragment android:name="me.paranoid.wifikill.fragment.StatusBarFragment" android:id="@id/status_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/adView" />
+    <com.google.ads.AdView android:id="@id/adView" android:background="@drawable/action_bar" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" ads:adSize="BANNER" ads:adUnitId="a14e8342443a4d6" ads:testDevices="5EADD88C8E39EC4893C84006ED5AF3A3"
+      xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" />
+    <View android:id="@id/top_line" android:background="#ff222222" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+</RelativeLayout>

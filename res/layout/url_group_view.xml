@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.paranoid.wifikill.AdapterRowLayout android:id="@id/RelativeLayout1" android:background="#11ffffff" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="?android:textAppearanceSmall" android:id="@id/date" android:paddingLeft="24.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/example_time" android:layout_alignBaseline="@id/host" />
+    <TextView android:textAppearance="?android:textAppearanceMedium" android:id="@id/host" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:text="@string/example_url_host" android:layout_toRightOf="@id/date" />
+</me.paranoid.wifikill.AdapterRowLayout>

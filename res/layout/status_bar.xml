@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/status_bar" android:background="@drawable/action_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Switch android:textSize="8.0dip" android:id="@id/kill_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textOn="kill all" android:textOff="kill all" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+    <Switch android:textSize="5.0dip" android:id="@id/attach_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textOn="grab all" android:textOff="grab all" android:layout_toLeftOf="@id/kill_all" android:textAllCaps="true" />
+    <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:textColorPrimary" android:id="@id/online" android:paddingLeft="8.0dip" android:paddingRight="8.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/statusbar_0" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+    <View android:id="@id/view3" android:background="?android:dividerVertical" android:layout_width="1.0dip" android:layout_height="16.0dip" android:layout_toRightOf="@id/online" android:layout_centerVertical="true" />
+    <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:textColorTertiary" android:id="@id/offline" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:text="@string/statusbar_0" android:layout_toRightOf="@id/view3" android:layout_centerVertical="true" />
+</RelativeLayout>

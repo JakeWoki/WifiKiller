@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="General options">
+        <CheckBoxPreference android:title="Full Screen" android:key="pref_key_fullscreen" android:summary="Hide notification bar" android:defaultValue="false" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Device list options">
+        <CheckBoxPreference android:title="Show network names" android:key="pref_key_show_nbname" android:summary="show NetBIOS (network) names" android:defaultValue="false" />
+        <CheckBoxPreference android:title="Show MAC" android:key="pref_key_show_hwaddr" android:summary="show MAC (hw NIC) address" android:defaultValue="true" />
+        <CheckBoxPreference android:title="Show NIC manufacturer" android:key="pref_key_show_vendor" android:summary="show vendor of the NIC" android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

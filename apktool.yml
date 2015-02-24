@@ -1,0 +1,13 @@
+version: 1.5.2
+apkFileName: wifi-v22-proapk
+isFrameworkApk: false
+usesFramework:
+  ids:
+  - 1
+sdkInfo:
+  minSdkVersion: '14'
+  targetSdkVersion: '17'
+packageInfo:
+  cur_package: me.paranoid.wifikill
+  orig_package: me.paranoid.wifikill
+compressionType: true

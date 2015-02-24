@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/RelativeLayout1" android:background="#75000000" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/top_bar" android:background="#20000000" android:focusableInTouchMode="true" android:descendantFocusability="beforeDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <View android:id="@id/shadow" android:background="@drawable/shadow_top" android:layout_width="fill_parent" android:layout_height="12.0dip" />
+        <EditText android:textAppearance="?android:textAppearanceMedium" android:ellipsize="end" android:id="@id/name" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/hint_device_name" android:maxLines="1" android:lines="1" android:layout_alignParentLeft="true" android:layout_centerVertical="true" android:inputType="text" />
+        <View android:id="@id/line3" android:background="#20ffffff" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_below="@id/name" android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/RelativeLayout2" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@id/detail_bar" android:layout_below="@id/top_bar">
+        <ExpandableListView android:id="@id/url" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <com.google.ads.AdView android:id="@id/adView" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/detail_bar" android:layout_centerHorizontal="true" ads:adSize="BANNER" ads:adUnitId="a14e8342443a4d6" ads:testDevices="5EADD88C8E39EC4893C84006ED5AF3A3"
+      xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" />
+    <View android:id="@id/view1" android:background="@drawable/shadow_bottom" android:layout_width="fill_parent" android:layout_height="16.0dip" android:layout_above="@id/detail_bar" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/detail_bar" android:background="@drawable/action_bar" android:paddingLeft="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <Switch android:id="@id/attach_switch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textOn="grab" android:textOff="grab" />
+        <Switch android:id="@id/kill_switch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textOn="kill" android:textOff="kill" />
+        <TextView android:gravity="right" android:id="@id/detail_ip" android:paddingRight="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/example_ip" android:shadowColor="#ff000000" android:shadowDx="0.0" android:shadowDy="0.0" android:shadowRadius="5.0" />
+    </LinearLayout>
+    <View android:id="@id/line" android:background="#60ffffff" android:layout_width="1.0dip" android:layout_height="fill_parent" />
+    <View android:id="@id/shadow_top" android:background="@drawable/shadow_top" android:layout_width="wrap_content" android:layout_height="16.0dip" />
+    <View android:id="@id/shadow_left" android:background="@drawable/shadow_left" android:layout_width="24.0dip" android:layout_height="wrap_content" android:layout_alignParentLeft="true" />
+</RelativeLayout>

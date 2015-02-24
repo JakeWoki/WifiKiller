@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@*android:drawable/ic_media_play" android:id="@id/menu_power" android:checked="true" android:title="START" android:checkable="true" android:showAsAction="always|withText" />
+    <item android:icon="@drawable/ic_menu_refresh" android:id="@id/menu_refresh" android:title="Refresh" android:showAsAction="always" />
+    <item android:icon="@*android:drawable/ic_menu_search" android:id="@id/menu_search" android:title="Search" android:showAsAction="ifRoom" android:actionViewClass="android.widget.SearchView" />
+    <item android:icon="@*android:drawable/ic_menu_preferences" android:id="@id/menu_preferences" android:title="Preferences" android:showAsAction="ifRoom|withText" />
+    <item android:icon="@*android:drawable/ic_menu_help" android:id="@id/menu_help" android:title="Help" android:showAsAction="ifRoom|withText" />
+    <item android:icon="@*android:drawable/ic_menu_info_details" android:id="@id/menu_about" android:title="About" android:showAsAction="ifRoom|withText" />
+</menu>

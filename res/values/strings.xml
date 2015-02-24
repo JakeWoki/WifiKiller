@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WiFiKill</string>
+    <string name="hello">Hello World, WiFiKillActivity!</string>
+    <string name="kill_all_switch">Intercept All</string>
+    <string name="example_ip">192.168.0.128</string>
+    <string name="example_device_name">zosia</string>
+    <string name="device_label_up">"up: "</string>
+    <string name="example_1mb">1Mb</string>
+    <string name="device_label_down">down:</string>
+    <string name="example_device_vendor">Apple Inc</string>
+    <string name="example_http_link">http://link/</string>
+    <string name="hint_device_name">device name</string>
+    <string name="switch_kill">KILL</string>
+    <string name="example_10mb">10mb</string>
+    <string name="statusbar_0">0</string>
+    <string name="attach">Attach</string>
+    <string name="attach_to_all">Attach to All</string>
+    <string name="killed">killed</string>
+    <string name="example_time">19:24:22</string>
+    <string name="example_url_path">/index.html</string>
+    <string name="example_url_host">forum.ponury.net</string>
+</resources>
