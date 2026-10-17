@@ -33,4 +33,8 @@
         android:id="@+id/menu_about"
         android:title="About"
         android:showAsAction="withText|ifRoom"/>
+    <item
+        android:id="@+id/menu_export_inventory"
+        android:title="Export inventory"
+        android:showAsAction="never"/>
 </menu>
