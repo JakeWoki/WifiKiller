@@ -37,6 +37,63 @@ public class WFKService extends Service {
     public boolean b = false;
     final Messenger c = new Messenger(new g(this));
 
+    /**
+     * Accept only canonical dotted-decimal IPv4 addresses before using a device
+     * address in a command sent to the privileged shell.
+     */
+    private static boolean isValidIpv4Address(String address) {
+        if (address == null) {
+            return false;
+        }
+        String[] octets = address.split("\\.", -1);
+        if (octets.length != 4) {
+            return false;
+        }
+        for (String octet : octets) {
+            if (octet.isEmpty() || octet.length() > 3
+                    || (octet.length() > 1 && octet.charAt(0) == '0')) {
+                return false;
+            }
+            int value = 0;
+            for (int i = 0; i < octet.length(); i++) {
+                char ch = octet.charAt(i);
+                if (ch < '0' || ch > '9') {
+                    return false;
+                }
+                value = value * 10 + (ch - '0');
+            }
+            if (value > 255) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isValidDevice(a device) {
+        return device != null && isValidIpv4Address(device.a);
+    }
+
+    /**
+     * Device metadata files are keyed by a MAC-like identifier. Restrict the key
+     * to hex digits, colons and hyphens to prevent path traversal.
+     */
+    private static boolean isSafeDeviceKey(String key) {
+        if (key == null || key.isEmpty() || key.length() > 64) {
+            return false;
+        }
+        for (int i = 0; i < key.length(); i++) {
+            char ch = key.charAt(i);
+            boolean allowed = (ch >= '0' && ch <= '9')
+                    || (ch >= 'a' && ch <= 'f')
+                    || (ch >= 'A' && ch <= 'F')
+                    || ch == ':' || ch == '-';
+            if (!allowed) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /* JADX INFO: Access modifiers changed from: public */
     public void a(int i, Object obj) {
         for (int size = this.f.size() - 1; size >= 0; size--) {
@@ -75,6 +132,10 @@ public class WFKService extends Service {
     }
 
     static /* synthetic */ void a(WFKService wFKService, a aVar) {
+        if (!isValidDevice(aVar) || wFKService.h == null) {
+            me.paranoid.a.c.a("Ignoring invalid device update");
+            return;
+        }
         me.paranoid.a.c.a("---");
         wFKService.a(aVar);
         wFKService.h.b("1" + aVar.a + "\n");
@@ -88,6 +149,10 @@ public class WFKService extends Service {
     }
 
     public void a(a aVar) {
+        if (!isValidDevice(aVar) || this.i == null) {
+            me.paranoid.a.c.a("Refusing invalid device address while removing rules");
+            return;
+        }
         this.i.b("iptables -D FORWARD -s " + aVar.a + " -p tcp -j REJECT --reject-with tcp-reset\n");
         this.i.b("iptables -D FORWARD -s " + aVar.a + " -p udp -j REJECT --reject-with icmp-port-unreachable\n");
     }
@@ -95,6 +160,10 @@ public class WFKService extends Service {
     /* JADX INFO: Access modifiers changed from: public */
     public String b(String str) {
         String line = null;
+        if (!isSafeDeviceKey(str)) {
+            me.paranoid.a.c.a("Refusing invalid device metadata key");
+            return null;
+        }
         File file = new File(getApplicationContext().getFilesDir().getPath() + "/devices/" + str);
         if (!file.exists()) {
             return null;
@@ -149,6 +218,10 @@ public class WFKService extends Service {
     }
 
     static /* synthetic */ void b(WFKService wFKService, a aVar) {
+        if (!isValidDevice(aVar) || wFKService.h == null || wFKService.i == null) {
+            me.paranoid.a.c.a("Ignoring invalid device reset");
+            return;
+        }
         me.paranoid.a.c.a("---");
         wFKService.h.b("0" + aVar.a + "\n");
         wFKService.a(aVar);
@@ -177,10 +250,11 @@ public class WFKService extends Service {
         if (wFKService.k != null) {
             return;
         }
-        if (!new File(str).exists()) {
+        if (!new File(str).isFile()) {
             wFKService.a("Binary file not present!");
+            return;
         }
-        JNIExec.a("chmod 777 " + str);
+        JNIExec.a("chmod 700 " + str);
         JNIExec.a("iptables -F; iptables -X && iptables -t nat -F; iptables -t nat -Xiptables -P FORWARD ACCEPT && iptables -I FORWARD -j ACCEPT && iptables -t nat -I POSTROUTING -j MASQUERADE &&echo 1 > /proc/sys/net/ipv4/ip_forward");
         wFKService.h = new JNIExec(new e(wFKService));
         wFKService.i = new JNIExec(new f(wFKService));
@@ -203,7 +277,21 @@ public class WFKService extends Service {
                     wFKService.a("Unable to start service, do you have root?");
                     return;
                 }
-                wFKService.j = Integer.parseInt(read.split("PID ")[1]);
+                String[] pidParts = read.split("PID ", 2);
+                if (pidParts.length != 2 || !pidParts[1].trim().matches("[0-9]+")) {
+                    wFKService.a("Invalid startup response from wfk process");
+                    return;
+                }
+                try {
+                    wFKService.j = Integer.parseInt(pidParts[1].trim());
+                } catch (NumberFormatException invalidPid) {
+                    wFKService.a("Invalid process ID returned by wfk");
+                    return;
+                }
+                if (wFKService.j <= 0) {
+                    wFKService.a("Invalid process ID returned by wfk");
+                    return;
+                }
                 wFKService.k = new i(wFKService);
                 wFKService.k.start();
                 return;
@@ -213,6 +301,10 @@ public class WFKService extends Service {
     }
 
     static /* synthetic */ void c(WFKService wFKService, a aVar) {
+        if (!isValidDevice(aVar) || wFKService.i == null) {
+            me.paranoid.a.c.a("Ignoring invalid device rule request");
+            return;
+        }
         me.paranoid.a.c.a("---");
         wFKService.i.b("iptables -I FORWARD -s " + aVar.a + " -p tcp -j REJECT --reject-with tcp-reset\n");
         wFKService.i.b("iptables -I FORWARD -s " + aVar.a + " -p udp -j REJECT --reject-with icmp-port-unreachable\n");
@@ -221,6 +313,10 @@ public class WFKService extends Service {
     }
 
     static /* synthetic */ void d(WFKService wFKService, a aVar) {
+        if (!isValidDevice(aVar) || wFKService.i == null) {
+            me.paranoid.a.c.a("Ignoring invalid device rule removal");
+            return;
+        }
         me.paranoid.a.c.a("---");
         int i = 3;
         while (true) {
