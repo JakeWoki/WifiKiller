@@ -404,7 +404,9 @@ public class WiFiKill extends Activity {
     @Override // android.app.Activity
     protected void onPause() {
         super.onPause();
-        this.o.release();
+        if (this.o != null && this.o.isHeld()) {
+            this.o.release();
+        }
     }
 
     @Override // android.app.Activity
