@@ -341,9 +341,64 @@ public class WiFiKill extends Activity {
             case R.id.menu_about /* 2131296310 */:
                 me.paranoid.a.c.a(n, "About", "This program just a proof of concept, please check my other cool apps on my website: http://forum.paranoid.me/");
                 return false;
+            case R.id.menu_export_inventory:
+                exportDeviceInventory();
+                return true;
             default:
                 return false;
         }
+    }
+
+    /**
+     * Share a read-only snapshot of devices that are already present in the
+     * current list. This does not trigger a scan or change network state.
+     */
+    private void exportDeviceInventory() {
+        me.paranoid.wifikill.a adapter = me.paranoid.wifikill.a.a();
+        if (adapter == null || adapter.getCount() == 0) {
+            me.paranoid.a.c.a(this, "No discovered devices to export. Refresh the device list first.");
+            return;
+        }
+
+        StringBuilder report = new StringBuilder();
+        report.append("WiFiKill device inventory\n");
+        report.append("Generated: ")
+                .append(new java.text.SimpleDateFormat(
+                        "yyyy-MM-dd HH:mm:ss", java.util.Locale.US)
+                        .format(new java.util.Date()))
+                .append('\n');
+        report.append("Android: ").append(safeReportValue(Build.VERSION.RELEASE))
+                .append(" (SDK ").append(Build.VERSION.SDK_INT).append(")\n");
+        report.append("Devices: ").append(adapter.getCount()).append("\n\n");
+
+        for (int index = 0; index < adapter.getCount(); index++) {
+            me.paranoid.wifikill.service.a device = adapter.getItem(index);
+            if (device == null) {
+                continue;
+            }
+            report.append("Device ").append(index + 1).append('\n');
+            report.append("  IP: ").append(safeReportValue(device.a)).append('\n');
+            report.append("  MAC: ").append(safeReportValue(device.b)).append('\n');
+            report.append("  Name: ").append(safeReportValue(device.b())).append('\n');
+            report.append("  Network name: ").append(safeReportValue(device.c)).append('\n');
+            report.append("  Vendor: ").append(safeReportValue(device.d)).append('\n');
+            report.append("  State code: ").append(device.e).append('\n');
+            report.append("  Bytes up/down: ").append(device.f).append(" / ")
+                    .append(device.g).append("\n\n");
+        }
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "WiFiKill device inventory");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, report.toString());
+        startActivity(Intent.createChooser(shareIntent, "Share device inventory"));
+    }
+
+    private static String safeReportValue(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            return "-";
+        }
+        return value.replace('\r', ' ').replace('\n', ' ').trim();
     }
 
     @Override // android.app.Activity
