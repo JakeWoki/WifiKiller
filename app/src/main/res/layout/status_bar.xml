@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/status_bar"
+    android:background="@drawable/action_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true">
+    <Switch
+        android:textSize="8dp"
+        android:id="@+id/kill_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="kill all"
+        android:textOff="kill all"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+    <Switch
+        android:textSize="5dp"
+        android:id="@+id/attach_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="grab all"
+        android:textOff="grab all"
+        android:layout_toLeftOf="@+id/kill_all"
+        android:textAllCaps="true"/>
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?android:attr/textColorPrimary"
+        android:id="@+id/online"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statusbar_0"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"/>
+    <View
+        android:id="@+id/view3"
+        android:background="?android:attr/dividerVertical"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:layout_toRightOf="@+id/online"
+        android:layout_centerVertical="true"/>
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?android:attr/textColorTertiary"
+        android:id="@+id/offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/statusbar_0"
+        android:layout_toRightOf="@+id/view3"
+        android:layout_centerVertical="true"/>
+</RelativeLayout>

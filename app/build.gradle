@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'me.paranoid.wifikill'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'me.paranoid.wifikill'
+        minSdk 21
+        targetSdk 34
+        versionCode 2020
+        versionName '2.2-mod'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+    }
+
+    buildFeatures {
+        buildConfig = false
+    }
+}
