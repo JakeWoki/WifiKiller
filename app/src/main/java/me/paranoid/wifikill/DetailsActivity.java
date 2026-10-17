@@ -27,7 +27,9 @@ public class DetailsActivity extends Activity {
     @Override // android.app.Activity
     protected void onPause() {
         super.onPause();
-        this.a.release();
+        if (this.a != null && this.a.isHeld()) {
+            this.a.release();
+        }
     }
 
     @Override // android.app.Activity
