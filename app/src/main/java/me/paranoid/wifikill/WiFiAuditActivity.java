@@ -155,9 +155,9 @@ public final class WiFiAuditActivity extends Activity {
                 != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
-        return Build.VERSION.SDK_INT < 33
-                || checkSelfPermission(Manifest.permission.NEARBY_WIFI_DEVICES)
-                == PackageManager.PERMISSION_GRANTED;
+        // Android requires FINE_LOCATION for getScanResults() and startScan(),
+        // including on Android 13+. NEARBY_WIFI_DEVICES is not required by these APIs.
+        return true;
     }
 
     private void requestScanPermissions() {
@@ -169,11 +169,6 @@ public final class WiFiAuditActivity extends Activity {
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-        if (Build.VERSION.SDK_INT >= 33
-                && checkSelfPermission(Manifest.permission.NEARBY_WIFI_DEVICES)
-                != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.NEARBY_WIFI_DEVICES);
         }
         if (permissions.isEmpty()) {
             renderResults("Permissions are available.");
@@ -353,8 +348,11 @@ public final class WiFiAuditActivity extends Activity {
         if (frequency >= 5925) {
             return "6 GHz";
         }
-        if (frequency >= 4900) {
+        if (frequency >= 5000) {
             return "5 GHz";
+        }
+        if (frequency >= 4900) {
+            return "4.9 GHz";
         }
         return "2.4 GHz";
     }
@@ -366,7 +364,10 @@ public final class WiFiAuditActivity extends Activity {
         if (frequency >= 2412 && frequency <= 2472) {
             return String.valueOf((frequency - 2407) / 5);
         }
-        if (frequency >= 4900 && frequency < 5925) {
+        if (frequency >= 4900 && frequency < 5000) {
+            return String.valueOf((frequency - 4000) / 5);
+        }
+        if (frequency >= 5000 && frequency < 5925) {
             return String.valueOf((frequency - 5000) / 5);
         }
         if (frequency >= 5925 && frequency <= 7125) {
