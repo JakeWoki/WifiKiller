@@ -38,6 +38,9 @@ public final class a extends BaseAdapter {
     }
 
     public final int a(String str) {
+        if (str == null || this.b == null) {
+            return -1;
+        }
         int i = 0;
         Iterator it = this.b.iterator();
         while (true) {
@@ -56,6 +59,9 @@ public final class a extends BaseAdapter {
     @Override // android.widget.Adapter
     /* JADX INFO: renamed from: a, reason: merged with bridge method [inline-methods] */
     public final me.paranoid.wifikill.service.a getItem(int i) {
+        if (this.b == null || i < 0 || i >= this.b.size()) {
+            return null;
+        }
         return (me.paranoid.wifikill.service.a) this.b.get(i);
     }
 
@@ -64,6 +70,9 @@ public final class a extends BaseAdapter {
     }
 
     public final me.paranoid.wifikill.service.a b(String str) {
+        if (str == null || this.b == null) {
+            return null;
+        }
         for (Object obj : this.b) {
             me.paranoid.wifikill.service.a aVar = (me.paranoid.wifikill.service.a) obj;
             if (aVar.a.equals(str)) {
@@ -93,6 +102,9 @@ public final class a extends BaseAdapter {
     }
 
     public final int e() {
+        if (this.b == null) {
+            return 0;
+        }
         return this.b.size() - d();
     }
 
@@ -106,11 +118,7 @@ public final class a extends BaseAdapter {
 
     @Override // android.widget.Adapter
     public final long getItemId(int i) {
-        long j;
-        synchronized (this.b) {
-            j = i;
-        }
-        return j;
+        return i;
     }
 
     @Override // android.widget.Adapter
