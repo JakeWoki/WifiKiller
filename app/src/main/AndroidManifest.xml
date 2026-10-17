@@ -57,6 +57,12 @@
             android:theme="@android:style/Theme.Holo" />
 
         <activity
+            android:name="me.paranoid.wifikill.LocalDeauthActivity"
+            android:exported="false"
+            android:label="On-device wireless tools"
+            android:theme="@android:style/Theme.Holo" />
+
+        <activity
             android:name="me.paranoid.wifikill.EspDeautherActivity"
             android:exported="false"
             android:label="ESP8266 Deauther"

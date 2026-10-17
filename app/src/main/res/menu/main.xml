@@ -42,6 +42,10 @@
         android:title="Wi-Fi security audit"
         android:showAsAction="never"/>
     <item
+        android:id="@+id/menu_local_deauth"
+        android:title="On-device wireless tools"
+        android:showAsAction="never"/>
+    <item
         android:id="@+id/menu_esp_deauther"
         android:title="ESP8266 deauther"
         android:showAsAction="never"/>
