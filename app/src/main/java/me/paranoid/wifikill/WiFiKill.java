@@ -219,7 +219,7 @@ public class WiFiKill extends Activity {
         if (!q.getBoolean("root_warned", false) && !hasRoot()) {
             new AlertDialog.Builder(this)
                     .setTitle("未检测到 Root")
-                    .setMessage("WiFiKill 的扫描与断网依赖 root 和 32 位 wfk 二进制。未 root 的手机只能打开界面，无法真正断网。")
+                    .setMessage("WiFiKill 的扫描与断网依赖 root 和 32 位 wfk 二进制。未 root 时仍可使用 ESP8266 Deauther 控制功能（通过外部 ESP8266 硬件）。")
                     .setPositiveButton("知道了", null)
                     .show();
             q.edit().putBoolean("root_warned", true).apply();
@@ -346,6 +346,9 @@ public class WiFiKill extends Activity {
                 return true;
             case R.id.menu_wifi_audit:
                 startActivity(new Intent(this, WiFiAuditActivity.class));
+                return true;
+            case R.id.menu_esp_deauther:
+                startActivity(new Intent(this, EspDeautherActivity.class));
                 return true;
             default:
                 return false;

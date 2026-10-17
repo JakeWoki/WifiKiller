@@ -41,4 +41,8 @@
         android:id="@+id/menu_wifi_audit"
         android:title="Wi-Fi security audit"
         android:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_esp_deauther"
+        android:title="ESP8266 deauther"
+        android:showAsAction="never"/>
 </menu>
