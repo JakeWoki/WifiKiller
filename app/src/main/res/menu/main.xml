@@ -37,4 +37,8 @@
         android:id="@+id/menu_export_inventory"
         android:title="Export inventory"
         android:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_wifi_audit"
+        android:title="Wi-Fi security audit"
+        android:showAsAction="never"/>
 </menu>

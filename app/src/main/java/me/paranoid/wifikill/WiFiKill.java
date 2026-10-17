@@ -344,6 +344,9 @@ public class WiFiKill extends Activity {
             case R.id.menu_export_inventory:
                 exportDeviceInventory();
                 return true;
+            case R.id.menu_wifi_audit:
+                startActivity(new Intent(this, WiFiAuditActivity.class));
+                return true;
             default:
                 return false;
         }
