@@ -70,7 +70,17 @@ public class DevicesFragment extends ListFragment {
             return;
         }
         int iA = aVar.a(this.c);
-        a(iA, aVar.getItem(iA));
+        if (iA < 0 || iA >= aVar.getCount()) {
+            // The previously selected device may have disappeared after a scan.
+            // Clear the stale selection rather than indexing the list with -1.
+            this.c = null;
+            this.d = -1;
+            return;
+        }
+        me.paranoid.wifikill.service.a selectedDevice = aVar.getItem(iA);
+        if (selectedDevice != null) {
+            a(iA, selectedDevice);
+        }
     }
 
     @Override // android.app.Fragment
