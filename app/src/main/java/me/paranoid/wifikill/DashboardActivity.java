@@ -35,7 +35,7 @@ public class DashboardActivity extends Activity {
 
         TextView eyebrow = text("W I F I K I L L   /   TOOLS", 12, accent, true);
         root.addView(eyebrow);
-        TextView title = text("Wireless\\nWorkbench", 32, Color.WHITE, true);
+        TextView title = text("Wireless\nWorkbench", 32, Color.WHITE, true);
         title.setPadding(0, dp(10), 0, dp(8));
         root.addView(title);
         TextView intro = text("无线诊断与被动分析工作台", 15, muted, false);
