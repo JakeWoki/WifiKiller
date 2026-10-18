@@ -251,17 +251,29 @@ public class MonitorModeActivity extends Activity {
                 } catch (Exception ignored) { }
             });
             reader.start();
-            if (p.waitFor(timeoutMs, java.util.concurrent.TimeUnit.MILLISECONDS)) {
-                code = p.exitValue();
+            long deadline = System.currentTimeMillis() + timeoutMs;
+            boolean finished = false;
+            while (System.currentTimeMillis() < deadline) {
+                try {
+                    code = p.exitValue();
+                    finished = true;
+                    break;
+                } catch (IllegalThreadStateException stillRunning) {
+                    Thread.sleep(50);
+                }
+            }
+            if (finished) {
                 reader.join(1000);
             } else {
-                p.destroyForcibly();
+                p.destroy();
                 synchronized (out) { out.append("\n命令超时"); }
             }
         } catch (Exception e) {
             synchronized (out) { out.append(e.getClass().getSimpleName()).append(": ").append(e.getMessage()); }
         } finally {
-            if (p != null && p.isAlive()) p.destroyForcibly();
+            if (p != null) {
+                try { p.exitValue(); } catch (IllegalThreadStateException stillRunning) { p.destroy(); }
+            }
         }
         synchronized (out) { return new Result(code, out.toString()); }
     }
